@@ -31,6 +31,8 @@ import java.util.ArrayList;
 
 public class MainActivity2 extends AppCompatActivity {
     private FragmentMainBinding binding;
+    String short_s = "";
+    String s = "";
     int count = 0; // 0 for read more and 1 for read less
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,10 +41,23 @@ public class MainActivity2 extends AppCompatActivity {
         setContentView(binding.getRoot());
         Bundle extras= getIntent().getExtras();
         String t = extras.getString("Title");
-        final String s = extras.getString("Sub-Title");
-        final String short_s = "";
+        s = extras.getString("Sub-Title");
+        String[] words = s.split("\\s+");
+        if(words.length<50)
+        {
+            binding.readMoreLess.setVisibility(View.INVISIBLE);
+            short_s = s;
+
+        }
+        else{
+            for(int i = 0; i < 50; i++)
+            {
+                short_s += words[i] + " ";
+            }
+        }
+        binding.activity2SubTitle.setText(short_s);
         binding.activity2Title.setText(t);
-        binding.activity2SubTitle.setText(s);
+
         Log.d("Message",s);
         binding.readMoreLess.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,4 +80,20 @@ public class MainActivity2 extends AppCompatActivity {
         });
 
     }
+
+//    private String getFirstFiftyWords(String s_new) {
+//        String s1 = s_new;
+//        int words = 0;
+//        int i_pointer = 0;
+//        while(words!=50 && i_pointer<s1.length())
+//        {
+//            if(TextUtils.equals(s_new.charAt(i_pointer)," "))
+//            {
+//                words+=1;
+//            }
+//            i_pointer++;
+//        }
+//        s1 = s1.substring(0,i_pointer);
+//        return s1;
+//    }
 }
