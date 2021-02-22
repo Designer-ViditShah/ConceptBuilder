@@ -14,7 +14,7 @@ import com.example.conceptbuilder.databinding.CommonLayoutBinding;
 public class myAdapter extends RecyclerView.Adapter<myAdapter.holder>
 {
     String title[], subtitle[];
-
+    private View.OnClickListener onItemClickListener;
     public myAdapter(String[] title, String[] subtitle) {
         this.title = title;
         this.subtitle = subtitle;
@@ -42,7 +42,12 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder>
     }
 
 
+    public void setOnItemClickListener(View.OnClickListener clickListener) {
+        onItemClickListener = clickListener;
+    }
     class holder extends RecyclerView.ViewHolder {
+
+
         ImageView img;
         TextView tv1,tv2;
         public holder(@NonNull View itemView) {
@@ -50,6 +55,8 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder>
             img = (ImageView)itemView.findViewById(R.id.imageView);
             tv1 = (TextView)itemView.findViewById(R.id.main_title);
             tv2 = (TextView)itemView.findViewById(R.id.sub_title);
+            itemView.setTag(this);
+            itemView.setOnClickListener(onItemClickListener);
         }
     }
 }

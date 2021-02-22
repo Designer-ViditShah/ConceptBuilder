@@ -1,4 +1,5 @@
 package com.example.conceptbuilder;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
@@ -23,37 +24,40 @@ import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-
-import com.example.conceptbuilder.ui.main.SectionsPagerAdapter;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
+
+    String[] title = {"Sachin Tendulkar 1", "Sachin Tendulkar 2", "Sachin Tendulkar 3","Sachin Tendulkar 4","Sachin Tendulkar 5","Sachin Tendulkar 6","Sachin Tendulkar 7","Sachin Tendulkar 8","Sachin Tendulkar 9","Sachin Tendulkar 10","Sachin Tendulkar 11","Sachin Tendulkar 12","Sachin Tendulkar 13","Sachin Tendulkar 14","Sachin Tendulkar 15"};
+    String[] subtitle = {getString(R.string.sachin),getString(R.string.sachin), getString(R.string.sachin),getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin), getString(R.string.sachin)};
 //    private RoundImage roundImage;
 //    private CommonLayoutBinding clb;
+    private View.OnClickListener onItemClickListener = new View.OnClickListener() {
+    @Override
+    public void onClick(View view) {
+        RecyclerView.ViewHolder viewHolder = (RecyclerView.ViewHolder) view.getTag();
+
+        int position = viewHolder.getAdapterPosition();
+//        Toast.makeText(MainActivity.this, "You Clicked: " + title[position], Toast.LENGTH_SHORT).show();
+        Intent intent = new Intent(getApplicationContext(),MainActivity2.class);
+        intent.putExtra("Title", title[position]);
+        intent.putExtra("Sub-Title", subtitle[position]);
+        startActivity(intent);
+    }
+};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
-//        clb = CommonLayoutBinding.inflate(getLayoutInflater());
-//        View view = binding.getRoot();
         setContentView(binding.getRoot());
-//        Bitmap bm = BitmapFactory.decodeResource(getResources(),R.drawable.profile);
-//        roundImage = new RoundImage(bm);
-//        clb.imageView.setImageDrawable(roundImage);
-
-//        SectionsPagerAdapter sectionsPagerAdapter = new SectionsPagerAdapter(this, getSupportFragmentManager());
-//        ViewPager viewPager = findViewById(R.id.view_pager);
-//        viewPager.setAdapter(sectionsPagerAdapter);
-//        TabLayout tabs = findViewById(R.id.tabs);
-//        tabs.setupWithViewPager(viewPager);
-//        FloatingActionButton fab = findViewById(R.id.fab);
-        String[] title = {"Sachin Tendulkar", "Title2", "Title3","Title4", "Title5", "Title6"};
-        String[] subtitle = {getString(R.string.sachin),"SubTitle2", "SubTitle3","SubTitle4", "SubTitle5", "SubTitle6"};
         binding.recyclerViewOrders.setLayoutManager(new LinearLayoutManager(this));
-        binding.recyclerViewOrders.setAdapter(new myAdapter(title, subtitle));
-//        binding.recyclerViewOrders.addOnItemTouchListener();
+        myAdapter madapter = new myAdapter(title, subtitle);
+        binding.recyclerViewOrders.setAdapter(madapter);
+        madapter.setOnItemClickListener(onItemClickListener);
+
 
 //        for(int i=0;i<title.length;i++)
 //        {
