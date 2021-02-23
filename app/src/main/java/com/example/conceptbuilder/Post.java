@@ -3,24 +3,15 @@ package com.example.conceptbuilder;
 import com.google.gson.annotations.SerializedName;
 
 public class Post {
+    // title is the key that is used in the json file to store the Title
+    // subtitle is the key that is used in the json file to store the SubTitle
     private String title;
-    private int userid;
-    private int id;
     @SerializedName("body")
     private String subtitle;
 
     public String getTitle() {
         return title;
     }
-
-    public int getUserid() {
-        return userid;
-    }
-
-    public int getId() {
-        return id;
-    }
-
     public String getSubtitle() {
         return subtitle;
     }
