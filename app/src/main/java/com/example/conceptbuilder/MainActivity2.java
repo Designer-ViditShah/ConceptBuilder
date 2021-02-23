@@ -25,7 +25,9 @@ public class MainActivity2 extends AppCompatActivity {
         String url = extras.getString("Photos");
         String t = extras.getString("Title");
         s = extras.getString("Sub-Title");
-        Picasso.with(this).load(url)
+        // inside load method we will pass the String url which will contain the url's fetched from the json file
+        // in this case I have taken the static path for an image so same image will be displayed in all the ImageView
+        Picasso.with(this).load("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg")
                 .placeholder(R.drawable.sachin) //sample image till the image is not loaded
                 .error(R.drawable.demo_1) // sample image if during the process to load the image error occured
                 .into(binding.activity2Image);

@@ -6,6 +6,8 @@ import com.example.conceptbuilder.databinding.ActivityMainBinding;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -65,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                 for(Photo photo : p1)
                 {
                     photolist.add(photo.getUrl());
+                    Log.d("Photosss",photo.getUrl().toString());
                 }
                 myAdapter madapter = new myAdapter(titlelist, subtitlelist, photolist);
                 binding.recyclerViewOrders.setAdapter(madapter);

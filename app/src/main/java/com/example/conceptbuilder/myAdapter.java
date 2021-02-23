@@ -51,7 +51,8 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder>
         holder.tv1.setText(title.get(position).toString());
         String sample = subtitle.get(position).toString().substring(0, Math.min(subtitle.get(position).toString().length(), 150));
         holder.tv2.setText(sample);
-        if(position<length_photos) {
+        ImageView imageView = holder.itemView.findViewById(R.id.imageView);
+        if(position<100) {
             String url = photolist.get(position).toString();
             Log.d("myadapter",url);
 //            Picasso.with(holder.itemView.getContext()).load(url)
@@ -61,11 +62,10 @@ public class myAdapter extends RecyclerView.Adapter<myAdapter.holder>
             RequestOptions requestOptions = new RequestOptions();
             requestOptions.placeholder(R.drawable.sachin);
             requestOptions.error(R.drawable.demo_1);
-
             Glide.with(holder.itemView.getContext())
                     .setDefaultRequestOptions(requestOptions)
-                    .load(url)
-                    .into(holder.img)
+                    .load("https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__340.jpg")
+                    .into(imageView);
             ;
         }
     }
